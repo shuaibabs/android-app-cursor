@@ -24,10 +24,10 @@ const ProfileScreen: React.FC = () => {
     },
     {
       id: '2',
-      title: 'Addresses',
-      subtitle: 'Manage your saved addresses',
+      title: 'Saved Addresses',
+      subtitle: 'Manage your service addresses',
       icon: 'location-on',
-      onPress: () => console.log('Addresses'),
+      onPress: () => console.log('Saved Addresses'),
     },
     {
       id: '3',
@@ -59,7 +59,7 @@ const ProfileScreen: React.FC = () => {
     {
       id: '6',
       title: 'Language',
-      subtitle: 'English (US)',
+      subtitle: 'English (India)',
       icon: 'language',
       onPress: () => console.log('Language'),
     },
@@ -72,10 +72,10 @@ const ProfileScreen: React.FC = () => {
     },
     {
       id: '8',
-      title: 'About',
+      title: 'About Urban Company',
       subtitle: 'App version and information',
       icon: 'info',
-      onPress: () => console.log('About'),
+      onPress: () => console.log('About Urban Company'),
     },
     {
       id: '9',
@@ -136,19 +136,19 @@ const ProfileScreen: React.FC = () => {
         {/* Profile Section */}
         <View style={styles.profileSection}>
           <View style={styles.profileImage}>
-            <Text style={styles.profileInitials}>JD</Text>
+            <Text style={styles.profileInitials}>UC</Text>
           </View>
           <View style={styles.profileInfo}>
-            <Text style={styles.profileName}>John Doe</Text>
-            <Text style={styles.profileEmail}>john.doe@example.com</Text>
-            <Text style={styles.profilePhone}>+1 (555) 123-4567</Text>
+            <Text style={styles.profileName}>Urban Company User</Text>
+            <Text style={styles.profileEmail}>user@urbancompany.com</Text>
+            <Text style={styles.profilePhone}>+91 98765 43210</Text>
           </View>
         </View>
 
         {/* Stats Section */}
         <View style={styles.statsSection}>
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>12</Text>
+            <Text style={styles.statNumber}>15</Text>
             <Text style={styles.statLabel}>Total Bookings</Text>
           </View>
           <View style={styles.statDivider} />
@@ -181,6 +181,11 @@ const ProfileScreen: React.FC = () => {
             <Icon name="logout" size={20} color="#FF3B30" />
             <Text style={styles.logoutText}>Log Out</Text>
           </TouchableOpacity>
+        </View>
+
+        {/* App Version */}
+        <View style={styles.versionSection}>
+          <Text style={styles.versionText}>Urban Company v1.0.0</Text>
         </View>
 
         {/* Bottom Spacing */}
@@ -371,6 +376,15 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#FF3B30',
     marginLeft: 8,
+  },
+  versionSection: {
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
+  versionText: {
+    fontSize: 14,
+    color: '#8E8E93',
+    fontWeight: '500',
   },
   bottomSpacing: {
     height: 20,

@@ -1,6 +1,7 @@
 /**
- * Urbon App Clone
+ * Urban Company App Clone
  * React Native App with Navigation
+ * Based on the official Urban Company (formerly UrbanClap) app
  */
 
 import React from 'react';

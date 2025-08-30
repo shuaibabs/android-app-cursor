@@ -17,53 +17,63 @@ const BookingsScreen: React.FC = () => {
   const currentBookings = [
     {
       id: '1',
-      service: 'Plumber',
-      provider: 'Mike Johnson',
+      service: 'Full Home Cleaning',
+      provider: 'Urban Company Professional',
       date: 'Today, 2:00 PM',
       status: 'confirmed',
-      price: '$75',
-      address: '123 Main St, Apt 4B',
+      price: '₹999',
+      address: '123 Main St, Apt 4B, Mumbai',
+      rating: 4.8,
     },
     {
       id: '2',
-      service: 'Electrician',
-      provider: 'Sarah Wilson',
+      service: 'AC Service & Repair',
+      provider: 'Urban Company Professional',
       date: 'Tomorrow, 10:00 AM',
       status: 'pending',
-      price: '$120',
-      address: '123 Main St, Apt 4B',
+      price: '₹399',
+      address: '123 Main St, Apt 4B, Mumbai',
+    },
+    {
+      id: '3',
+      service: 'Salon at Home',
+      provider: 'Urban Company Professional',
+      date: 'Dec 28, 2024, 3:30 PM',
+      status: 'confirmed',
+      price: '₹599',
+      address: '123 Main St, Apt 4B, Mumbai',
     },
   ];
 
   const pastBookings = [
     {
-      id: '3',
-      service: 'Barber',
-      provider: 'Alex Brown',
+      id: '4',
+      service: 'Plumber Services',
+      provider: 'Urban Company Professional',
       date: 'Yesterday, 3:30 PM',
       status: 'completed',
-      price: '$35',
-      address: '123 Main St, Apt 4B',
+      price: '₹299',
+      address: '123 Main St, Apt 4B, Mumbai',
       rating: 5,
     },
     {
-      id: '4',
-      service: 'Cleaner',
-      provider: 'Maria Garcia',
+      id: '5',
+      service: 'Bathroom Cleaning',
+      provider: 'Urban Company Professional',
       date: 'Dec 15, 2024',
       status: 'completed',
-      price: '$80',
-      address: '123 Main St, Apt 4B',
+      price: '₹399',
+      address: '123 Main St, Apt 4B, Mumbai',
       rating: 4,
     },
     {
-      id: '5',
-      service: 'Mechanic',
-      provider: 'Tom Davis',
+      id: '6',
+      service: 'Men\'s Haircut',
+      provider: 'Urban Company Professional',
       date: 'Dec 10, 2024',
       status: 'cancelled',
-      price: '$150',
-      address: '123 Main St, Apt 4B',
+      price: '₹199',
+      address: '123 Main St, Apt 4B, Mumbai',
     },
   ];
 
@@ -139,6 +149,19 @@ const BookingsScreen: React.FC = () => {
             <TouchableOpacity style={styles.actionButton}>
               <Icon name="cancel" size={16} color="#FF3B30" />
               <Text style={[styles.actionButtonText, { color: '#FF3B30' }]}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {selectedTab === 'past' && item.status === 'completed' && (
+          <View style={styles.actionButtons}>
+            <TouchableOpacity style={styles.actionButton}>
+              <Icon name="star" size={16} color="#FF6B35" />
+              <Text style={styles.actionButtonText}>Rate Service</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionButton}>
+              <Icon name="refresh" size={16} color="#FF6B35" />
+              <Text style={styles.actionButtonText}>Book Again</Text>
             </TouchableOpacity>
           </View>
         )}

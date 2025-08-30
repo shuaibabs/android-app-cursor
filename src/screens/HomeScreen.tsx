@@ -19,16 +19,33 @@ const { width } = Dimensions.get('window');
 const HomeScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const popularServices = [
-    { id: '1', title: 'Plumber', subtitle: '24/7 Emergency Service', icon: '🔧' },
-    { id: '2', title: 'Electrician', subtitle: 'Professional Wiring', icon: '⚡' },
-    { id: '3', title: 'Mechanic', subtitle: 'Car Repair & Maintenance', icon: '🚗' },
-    { id: '4', title: 'Barber', subtitle: 'Haircut & Styling', icon: '✂️' },
-    { id: '5', title: 'Cleaner', subtitle: 'Home & Office Cleaning', icon: '🧹' },
-    { id: '6', title: 'Painter', subtitle: 'Interior & Exterior', icon: '🎨' },
+  const serviceCategories = [
+    { id: '1', title: 'Insta Help', subtitle: 'Househelp in 15 minutes', icon: '⚡', color: '#FF6B35' },
+    { id: '2', title: 'Beauty & Wellness', subtitle: 'Salon at home', icon: '💄', color: '#FF69B4' },
+    { id: '3', title: 'Repairs', subtitle: 'Plumbers, Electricians', icon: '🔧', color: '#4CAF50' },
+    { id: '4', title: 'Cleaning', subtitle: 'Home & Pest Control', icon: '🧹', color: '#2196F3' },
+    { id: '5', title: 'Native', subtitle: 'Water Purifier Services', icon: '💧', color: '#9C27B0' },
+    { id: '6', title: 'Home Decor', subtitle: 'Painting & Improvement', icon: '🎨', color: '#FF9800' },
   ];
 
-  const renderServiceCard = ({ item }: { item: any }) => (
+  const popularServices = [
+    { id: '1', title: 'Full Home Cleaning', subtitle: 'Starting from ₹999', rating: 4.8, bookings: '50k+' },
+    { id: '2', title: 'AC Service & Repair', subtitle: 'Starting from ₹399', rating: 4.7, bookings: '25k+' },
+    { id: '3', title: 'Salon at Home', subtitle: 'Starting from ₹299', rating: 4.9, bookings: '30k+' },
+    { id: '4', title: 'Plumber Services', subtitle: 'Starting from ₹199', rating: 4.6, bookings: '20k+' },
+  ];
+
+  const renderServiceCategory = ({ item }: { item: any }) => (
+    <TouchableOpacity style={styles.categoryCard}>
+      <View style={[styles.categoryIcon, { backgroundColor: item.color }]}>
+        <Text style={styles.categoryIconText}>{item.icon}</Text>
+      </View>
+      <Text style={styles.categoryTitle}>{item.title}</Text>
+      <Text style={styles.categorySubtitle}>{item.subtitle}</Text>
+    </TouchableOpacity>
+  );
+
+  const renderPopularService = ({ item }: { item: any }) => (
     <Card
       title={item.title}
       subtitle={item.subtitle}
@@ -44,7 +61,7 @@ const HomeScreen: React.FC = () => {
         <View style={styles.header}>
           <View>
             <Text style={styles.greeting}>Good morning!</Text>
-            <Text style={styles.userName}>John Doe</Text>
+            <Text style={styles.userName}>Welcome to Urban Company</Text>
           </View>
           <TouchableOpacity style={styles.notificationButton}>
             <Icon name="notifications" size={24} color="#1C1C1E" />
@@ -70,24 +87,39 @@ const HomeScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* Banner Section */}
+        {/* Insta Help Banner */}
         <View style={styles.bannerContainer}>
           <View style={styles.banner}>
             <View style={styles.bannerContent}>
-              <Text style={styles.bannerTitle}>Get 20% Off</Text>
-              <Text style={styles.bannerSubtitle}>On your first booking</Text>
+              <Text style={styles.bannerTitle}>Insta Help</Text>
+              <Text style={styles.bannerSubtitle}>Get househelp in 15 minutes</Text>
+              <Text style={styles.bannerDetails}>4.7+ rated professionals • 20k+ happy customers</Text>
               <Button
                 title="Book Now"
-                onPress={() => console.log('Banner pressed')}
+                onPress={() => console.log('Insta Help pressed')}
                 size="small"
                 variant="secondary"
                 style={styles.bannerButton}
               />
             </View>
             <View style={styles.bannerIcon}>
-              <Text style={styles.bannerIconText}>🎉</Text>
+              <Text style={styles.bannerIconText}>⚡</Text>
             </View>
           </View>
+        </View>
+
+        {/* Service Categories */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>What do you need?</Text>
+          <FlatList
+            data={serviceCategories}
+            renderItem={renderServiceCategory}
+            keyExtractor={(item) => item.id}
+            numColumns={2}
+            columnWrapperStyle={styles.categoryRow}
+            scrollEnabled={false}
+            showsVerticalScrollIndicator={false}
+          />
         </View>
 
         {/* Popular Services */}
@@ -101,10 +133,8 @@ const HomeScreen: React.FC = () => {
           
           <FlatList
             data={popularServices}
-            renderItem={renderServiceCard}
+            renderItem={renderPopularService}
             keyExtractor={(item) => item.id}
-            numColumns={2}
-            columnWrapperStyle={styles.serviceRow}
             scrollEnabled={false}
             showsVerticalScrollIndicator={false}
           />
@@ -118,7 +148,7 @@ const HomeScreen: React.FC = () => {
               <View style={styles.quickActionIcon}>
                 <Icon name="schedule" size={24} color="#FF6B35" />
               </View>
-              <Text style={styles.quickActionText}>Book Now</Text>
+              <Text style={styles.quickActionText}>Book Service</Text>
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.quickAction}>
@@ -229,6 +259,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#FFFFFF',
     opacity: 0.9,
+    marginBottom: 4,
+  },
+  bannerDetails: {
+    fontSize: 12,
+    color: '#FFFFFF',
+    opacity: 0.8,
     marginBottom: 12,
   },
   bannerButton: {
@@ -265,11 +301,46 @@ const styles = StyleSheet.create({
     color: '#FF6B35',
     fontWeight: '600',
   },
-  serviceRow: {
+  categoryRow: {
     justifyContent: 'space-between',
   },
-  serviceCard: {
+  categoryCard: {
     width: (width - 60) / 2,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  categoryIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+  },
+  categoryIconText: {
+    fontSize: 20,
+  },
+  categoryTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#1C1C1E',
+    textAlign: 'center',
+    marginBottom: 4,
+  },
+  categorySubtitle: {
+    fontSize: 12,
+    color: '#8E8E93',
+    textAlign: 'center',
+  },
+  serviceCard: {
     marginBottom: 12,
   },
   quickActions: {

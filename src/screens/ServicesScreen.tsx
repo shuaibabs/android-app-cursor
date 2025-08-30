@@ -21,24 +21,48 @@ const ServicesScreen: React.FC = () => {
 
   const categories = [
     'All',
-    'Home',
-    'Automotive',
+    'Insta Help',
     'Beauty',
+    'Repairs',
     'Cleaning',
-    'Repair',
+    'Native',
+    'Home Decor',
   ];
 
   const allServices = [
-    { id: '1', title: 'Plumber', subtitle: '24/7 Emergency Service', category: 'Home', icon: '🔧', rating: 4.8, price: 'From $50' },
-    { id: '2', title: 'Electrician', subtitle: 'Professional Wiring', category: 'Home', icon: '⚡', rating: 4.9, price: 'From $60' },
-    { id: '3', title: 'Mechanic', subtitle: 'Car Repair & Maintenance', category: 'Automotive', icon: '🚗', rating: 4.7, price: 'From $80' },
-    { id: '4', title: 'Barber', subtitle: 'Haircut & Styling', category: 'Beauty', icon: '✂️', rating: 4.6, price: 'From $25' },
-    { id: '5', title: 'Cleaner', subtitle: 'Home & Office Cleaning', category: 'Cleaning', icon: '🧹', rating: 4.5, price: 'From $40' },
-    { id: '6', title: 'Painter', subtitle: 'Interior & Exterior', category: 'Home', icon: '🎨', rating: 4.4, price: 'From $100' },
-    { id: '7', title: 'Carpenter', subtitle: 'Custom Woodwork', category: 'Home', icon: '🔨', rating: 4.3, price: 'From $70' },
-    { id: '8', title: 'Gardener', subtitle: 'Landscaping & Maintenance', category: 'Home', icon: '🌱', rating: 4.2, price: 'From $45' },
-    { id: '9', title: 'Towing Service', subtitle: '24/7 Roadside Assistance', category: 'Automotive', icon: '🚛', rating: 4.1, price: 'From $90' },
-    { id: '10', title: 'Makeup Artist', subtitle: 'Professional Makeup', category: 'Beauty', icon: '💄', rating: 4.0, price: 'From $60' },
+    // Insta Help Services
+    { id: '1', title: 'Househelp', subtitle: 'Trained home cleaner & housekeeper', category: 'Insta Help', icon: '⚡', rating: 4.7, price: 'From ₹299', bookings: '20k+' },
+    { id: '2', title: 'Meal Prep Assistant', subtitle: 'Professional cooking help', category: 'Insta Help', icon: '🍳', rating: 4.6, price: 'From ₹399', bookings: '15k+' },
+    
+    // Beauty & Wellness Services
+    { id: '3', title: 'Salon at Home', subtitle: 'Professional beauty services', category: 'Beauty', icon: '💄', rating: 4.9, price: 'From ₹299', bookings: '30k+' },
+    { id: '4', title: 'Spa at Home', subtitle: 'Relaxing massage & spa', category: 'Beauty', icon: '🧖‍♀️', rating: 4.8, price: 'From ₹599', bookings: '25k+' },
+    { id: '5', title: 'Party Makeup', subtitle: 'Professional makeup for events', category: 'Beauty', icon: '✨', rating: 4.9, price: 'From ₹999', bookings: '10k+' },
+    { id: '6', title: 'Men\'s Haircut', subtitle: 'Professional grooming at home', category: 'Beauty', icon: '✂️', rating: 4.7, price: 'From ₹199', bookings: '20k+' },
+    { id: '7', title: 'Skin Consultation', subtitle: 'Expert dermatological advice', category: 'Beauty', icon: '👩‍⚕️', rating: 4.8, price: 'From ₹399', bookings: '8k+' },
+    
+    // Repair Services
+    { id: '8', title: 'Plumber Services', subtitle: '24/7 emergency plumbing', category: 'Repairs', icon: '🔧', rating: 4.6, price: 'From ₹199', bookings: '20k+' },
+    { id: '9', title: 'Electrician Services', subtitle: 'Professional electrical work', category: 'Repairs', icon: '⚡', rating: 4.7, price: 'From ₹299', bookings: '18k+' },
+    { id: '10', title: 'AC Service & Repair', subtitle: 'Expert AC maintenance', category: 'Repairs', icon: '❄️', rating: 4.7, price: 'From ₹399', bookings: '25k+' },
+    { id: '11', title: 'Appliance Repair', subtitle: 'Washing machine, fridge, TV', category: 'Repairs', icon: '🔌', rating: 4.5, price: 'From ₹299', bookings: '15k+' },
+    { id: '12', title: 'Carpenter Services', subtitle: 'Custom woodwork & repairs', category: 'Repairs', icon: '🔨', rating: 4.6, price: 'From ₹399', bookings: '12k+' },
+    
+    // Cleaning Services
+    { id: '13', title: 'Full Home Cleaning', subtitle: 'Complete home deep cleaning', category: 'Cleaning', icon: '🧹', rating: 4.8, price: 'From ₹999', bookings: '50k+' },
+    { id: '14', title: 'Bathroom Cleaning', subtitle: 'Professional bathroom cleaning', category: 'Cleaning', icon: '🚿', rating: 4.7, price: 'From ₹399', bookings: '30k+' },
+    { id: '15', title: 'Kitchen Cleaning', subtitle: 'Deep kitchen cleaning service', category: 'Cleaning', icon: '🍽️', rating: 4.7, price: 'From ₹499', bookings: '25k+' },
+    { id: '16', title: 'Sofa & Carpet Cleaning', subtitle: 'Professional upholstery cleaning', category: 'Cleaning', icon: '🛋️', rating: 4.6, price: 'From ₹599', bookings: '15k+' },
+    { id: '17', title: 'Pest Control', subtitle: 'Professional pest elimination', category: 'Cleaning', icon: '🐜', rating: 4.5, price: 'From ₹799', bookings: '10k+' },
+    
+    // Native Services
+    { id: '18', title: 'Native RO Installation', subtitle: '2-year service-free RO', category: 'Native', icon: '💧', rating: 4.8, price: 'From ₹2999', bookings: '5k+' },
+    { id: '19', title: 'RO Service & Repair', subtitle: 'Expert water purifier service', category: 'Native', icon: '🔧', rating: 4.6, price: 'From ₹299', bookings: '8k+' },
+    
+    // Home Decor Services
+    { id: '20', title: 'Home Painting', subtitle: 'Interior & exterior painting', category: 'Home Decor', icon: '🎨', rating: 4.7, price: 'From ₹1999', bookings: '12k+' },
+    { id: '21', title: 'Wall Panels', subtitle: 'Decorative wall installations', category: 'Home Decor', icon: '🏠', rating: 4.6, price: 'From ₹2999', bookings: '6k+' },
+    { id: '22', title: 'Seepage Repair', subtitle: 'Professional water damage repair', category: 'Home Decor', icon: '🔧', rating: 4.5, price: 'From ₹999', bookings: '8k+' },
   ];
 
   const filteredServices = allServices.filter(service => {
@@ -117,7 +141,7 @@ const ServicesScreen: React.FC = () => {
           />
         </View>
 
-        {/* Services Grid */}
+        {/* Services List */}
         <View style={styles.servicesContainer}>
           <View style={styles.servicesHeader}>
             <Text style={styles.servicesTitle}>
@@ -130,8 +154,6 @@ const ServicesScreen: React.FC = () => {
             data={filteredServices}
             renderItem={renderServiceCard}
             keyExtractor={(item) => item.id}
-            numColumns={2}
-            columnWrapperStyle={styles.serviceRow}
             scrollEnabled={false}
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={
@@ -254,11 +276,7 @@ const styles = StyleSheet.create({
     color: '#8E8E93',
     fontWeight: '500',
   },
-  serviceRow: {
-    justifyContent: 'space-between',
-  },
   serviceCard: {
-    width: (width - 60) / 2,
     marginBottom: 12,
   },
   emptyState: {

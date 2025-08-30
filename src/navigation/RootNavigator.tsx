@@ -4,10 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // Import screens
-import HomeScreen from '../screens/HomeScreen';
-import ServicesScreen from '../screens/ServicesScreen';
-import BookingsScreen from '../screens/BookingsScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import HomeScreen from '../../src/screens/HomeScreen';
+import ServicesScreen from '../../src/screens/ServicesScreen';
+import BookingsScreen from '../../src/screens/BookingsScreen';
+import ProfileScreen from '../../src/screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
