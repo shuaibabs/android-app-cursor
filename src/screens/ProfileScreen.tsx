@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useTheme } from '../../App';
 
 const ProfileScreen: React.FC = () => {
+  const { isDarkMode, toggleDarkMode, theme } = useTheme();
   const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
-  const [darkModeEnabled, setDarkModeEnabled] = React.useState(false);
 
   const menuItems = [
     {
@@ -53,8 +54,8 @@ const ProfileScreen: React.FC = () => {
       icon: 'dark-mode',
       onPress: () => console.log('Dark Mode'),
       hasSwitch: true,
-      switchValue: darkModeEnabled,
-      onSwitchChange: setDarkModeEnabled,
+      switchValue: isDarkMode,
+      onSwitchChange: toggleDarkMode,
     },
     {
       id: '6',
@@ -95,17 +96,17 @@ const ProfileScreen: React.FC = () => {
 
   const renderMenuItem = ({ item }: { item: any }) => (
     <TouchableOpacity
-      style={styles.menuItem}
+      style={[styles.menuItem, { backgroundColor: theme.cardBackground }]}
       onPress={item.onPress}
       activeOpacity={0.7}
     >
       <View style={styles.menuItemLeft}>
-        <View style={styles.menuItemIcon}>
-          <Icon name={item.icon} size={24} color="#FF6B35" />
+        <View style={[styles.menuItemIcon, { backgroundColor: isDarkMode ? '#3A3A3C' : '#FFF5F2' }]}>
+          <Icon name={item.icon} size={24} color={theme.primaryColor} />
         </View>
         <View style={styles.menuItemContent}>
-          <Text style={styles.menuItemTitle}>{item.title}</Text>
-          <Text style={styles.menuItemSubtitle}>{item.subtitle}</Text>
+          <Text style={[styles.menuItemTitle, { color: theme.textPrimary }]}>{item.title}</Text>
+          <Text style={[styles.menuItemSubtitle, { color: theme.textSecondary }]}>{item.subtitle}</Text>
         </View>
       </View>
       
@@ -113,63 +114,63 @@ const ProfileScreen: React.FC = () => {
         <Switch
           value={item.switchValue}
           onValueChange={item.onSwitchChange}
-          trackColor={{ false: '#E5E5EA', true: '#FF6B35' }}
+          trackColor={{ false: '#E5E5EA', true: theme.primaryColor }}
           thumbColor="#FFFFFF"
         />
       ) : (
-        <Icon name="chevron-right" size={24} color="#8E8E93" />
+        <Icon name="chevron-right" size={24} color={theme.textSecondary} />
       )}
     </TouchableOpacity>
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Profile</Text>
-          <TouchableOpacity style={styles.editButton}>
-            <Icon name="edit" size={24} color="#FF6B35" />
+          <Text style={[styles.headerTitle, { color: theme.textPrimary }]}>Profile</Text>
+          <TouchableOpacity style={[styles.editButton, { backgroundColor: theme.cardBackground }]}>
+            <Icon name="edit" size={24} color={theme.primaryColor} />
           </TouchableOpacity>
         </View>
 
         {/* Profile Section */}
-        <View style={styles.profileSection}>
+        <View style={[styles.profileSection, { backgroundColor: theme.cardBackground }]}>
           <View style={styles.profileImage}>
             <Text style={styles.profileInitials}>UC</Text>
           </View>
           <View style={styles.profileInfo}>
-            <Text style={styles.profileName}>Urban Company User</Text>
-            <Text style={styles.profileEmail}>user@urbancompany.com</Text>
-            <Text style={styles.profilePhone}>+91 98765 43210</Text>
+            <Text style={[styles.profileName, { color: theme.textPrimary }]}>Urban Company User</Text>
+            <Text style={[styles.profileEmail, { color: theme.textSecondary }]}>user@urbancompany.com</Text>
+            <Text style={[styles.profilePhone, { color: theme.textSecondary }]}>+91 98765 43210</Text>
           </View>
         </View>
 
         {/* Stats Section */}
-        <View style={styles.statsSection}>
+        <View style={[styles.statsSection, { backgroundColor: theme.cardBackground }]}>
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>15</Text>
-            <Text style={styles.statLabel}>Total Bookings</Text>
+            <Text style={[styles.statNumber, { color: theme.primaryColor }]}>15</Text>
+            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>Total Bookings</Text>
           </View>
-          <View style={styles.statDivider} />
+          <View style={[styles.statDivider, { backgroundColor: theme.borderColor }]} />
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>4.8</Text>
-            <Text style={styles.statLabel}>Average Rating</Text>
+            <Text style={[styles.statNumber, { color: theme.primaryColor }]}>4.8</Text>
+            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>Average Rating</Text>
           </View>
-          <View style={styles.statDivider} />
+          <View style={[styles.statDivider, { backgroundColor: theme.borderColor }]} />
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>8</Text>
-            <Text style={styles.statLabel}>Services Used</Text>
+            <Text style={[styles.statNumber, { color: theme.primaryColor }]}>8</Text>
+            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>Services Used</Text>
           </View>
         </View>
 
         {/* Menu Items */}
-        <View style={styles.menuSection}>
+        <View style={[styles.menuSection, { backgroundColor: theme.cardBackground }]}>
           {menuItems.map((item) => (
             <View key={item.id}>
               {renderMenuItem({ item })}
               {item.id !== menuItems[menuItems.length - 1].id && (
-                <View style={styles.menuDivider} />
+                <View style={[styles.menuDivider, { backgroundColor: theme.borderColor }]} />
               )}
             </View>
           ))}
@@ -177,7 +178,7 @@ const ProfileScreen: React.FC = () => {
 
         {/* Logout Button */}
         <View style={styles.logoutSection}>
-          <TouchableOpacity style={styles.logoutButton}>
+          <TouchableOpacity style={[styles.logoutButton, { backgroundColor: theme.cardBackground }]}>
             <Icon name="logout" size={20} color="#FF3B30" />
             <Text style={styles.logoutText}>Log Out</Text>
           </TouchableOpacity>
@@ -185,7 +186,7 @@ const ProfileScreen: React.FC = () => {
 
         {/* App Version */}
         <View style={styles.versionSection}>
-          <Text style={styles.versionText}>Urban Company v1.0.0</Text>
+          <Text style={[styles.versionText, { color: theme.textSecondary }]}>Urban Company v1.0.0</Text>
         </View>
 
         {/* Bottom Spacing */}
@@ -198,7 +199,6 @@ const ProfileScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
   },
   header: {
     flexDirection: 'row',
@@ -210,13 +210,11 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#1C1C1E',
   },
   editButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -230,7 +228,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 24,
-    backgroundColor: '#FFFFFF',
     marginHorizontal: 20,
     borderRadius: 16,
     marginBottom: 20,
@@ -260,21 +257,17 @@ const styles = StyleSheet.create({
   profileName: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#1C1C1E',
     marginBottom: 4,
   },
   profileEmail: {
     fontSize: 16,
-    color: '#8E8E93',
     marginBottom: 2,
   },
   profilePhone: {
     fontSize: 16,
-    color: '#8E8E93',
   },
   statsSection: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
     marginHorizontal: 20,
     borderRadius: 16,
     paddingVertical: 20,
@@ -292,20 +285,16 @@ const styles = StyleSheet.create({
   statNumber: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#FF6B35',
     marginBottom: 4,
   },
   statLabel: {
     fontSize: 14,
-    color: '#8E8E93',
     fontWeight: '500',
   },
   statDivider: {
     width: 1,
-    backgroundColor: '#E5E5EA',
   },
   menuSection: {
-    backgroundColor: '#FFFFFF',
     marginHorizontal: 20,
     borderRadius: 16,
     marginBottom: 20,
@@ -331,7 +320,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#FFF5F2',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 16,
@@ -342,16 +330,13 @@ const styles = StyleSheet.create({
   menuItemTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1C1C1E',
     marginBottom: 2,
   },
   menuItemSubtitle: {
     fontSize: 14,
-    color: '#8E8E93',
   },
   menuDivider: {
     height: 1,
-    backgroundColor: '#E5E5EA',
     marginLeft: 76,
   },
   logoutSection: {
@@ -362,7 +347,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
     paddingVertical: 16,
     borderRadius: 16,
     shadowColor: '#000',
@@ -383,7 +367,6 @@ const styles = StyleSheet.create({
   },
   versionText: {
     fontSize: 14,
-    color: '#8E8E93',
     fontWeight: '500',
   },
   bottomSpacing: {

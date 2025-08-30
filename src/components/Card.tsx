@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ViewStyle,
-  Image,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
+import { useTheme } from '../../App';
 
 interface CardProps {
   title: string;
@@ -27,11 +21,17 @@ const Card: React.FC<CardProps> = ({
   variant = 'service',
   children,
 }) => {
+  const { theme } = useTheme();
   const CardComponent = onPress ? TouchableOpacity : View;
 
   return (
     <CardComponent
-      style={[styles.card, styles[variant], style]}
+      style={[
+        styles.card,
+        styles[variant],
+        { backgroundColor: theme.cardBackground },
+        style,
+      ]}
       onPress={onPress}
       activeOpacity={0.8}
     >
@@ -43,11 +43,11 @@ const Card: React.FC<CardProps> = ({
         </View>
       )}
       <View style={styles.content}>
-        <Text style={styles.title} numberOfLines={2}>
+        <Text style={[styles.title, { color: theme.textPrimary }]} numberOfLines={2}>
           {title}
         </Text>
         {subtitle && (
-          <Text style={styles.subtitle} numberOfLines={1}>
+          <Text style={[styles.subtitle, { color: theme.textSecondary }]} numberOfLines={1}>
             {subtitle}
           </Text>
         )}
@@ -59,38 +59,31 @@ const Card: React.FC<CardProps> = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
+    borderRadius: 12,
+    padding: 16,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-    overflow: 'hidden',
+    shadowRadius: 4,
+    elevation: 2,
   },
   service: {
-    padding: 16,
-    minHeight: 120,
+    // Service card specific styles
   },
   booking: {
-    padding: 16,
-    marginBottom: 12,
+    // Booking card specific styles
   },
   promo: {
-    padding: 0,
-    minHeight: 160,
+    // Promo card specific styles
   },
   imageContainer: {
     marginBottom: 12,
   },
   imagePlaceholder: {
     width: '100%',
-    height: 80,
-    backgroundColor: '#F2F2F7',
+    height: 120,
     borderRadius: 8,
+    backgroundColor: '#F2F2F7',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -103,12 +96,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1C1C1E',
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
-    color: '#8E8E93',
     fontWeight: '400',
   },
 });

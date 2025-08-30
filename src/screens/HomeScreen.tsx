@@ -13,11 +13,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import { useTheme } from '../../App';
 
 const { width } = Dimensions.get('window');
 
 const HomeScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const { theme, isDarkMode } = useTheme();
 
   const serviceCategories = [
     { id: '1', title: 'Insta Help', subtitle: 'Househelp in 15 minutes', icon: '⚡', color: '#FF6B35' },
@@ -36,12 +38,12 @@ const HomeScreen: React.FC = () => {
   ];
 
   const renderServiceCategory = ({ item }: { item: any }) => (
-    <TouchableOpacity style={styles.categoryCard}>
+    <TouchableOpacity style={[styles.categoryCard, { backgroundColor: theme.cardBackground }]}>
       <View style={[styles.categoryIcon, { backgroundColor: item.color }]}>
         <Text style={styles.categoryIconText}>{item.icon}</Text>
       </View>
-      <Text style={styles.categoryTitle}>{item.title}</Text>
-      <Text style={styles.categorySubtitle}>{item.subtitle}</Text>
+      <Text style={[styles.categoryTitle, { color: theme.textPrimary }]}>{item.title}</Text>
+      <Text style={[styles.categorySubtitle, { color: theme.textSecondary }]}>{item.subtitle}</Text>
     </TouchableOpacity>
   );
 
@@ -55,33 +57,33 @@ const HomeScreen: React.FC = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>Good morning!</Text>
-            <Text style={styles.userName}>Welcome to Urban Company</Text>
+            <Text style={[styles.greeting, { color: theme.textSecondary }]}>Good morning!</Text>
+            <Text style={[styles.userName, { color: theme.textPrimary }]}>Welcome to Urban Company</Text>
           </View>
-          <TouchableOpacity style={styles.notificationButton}>
-            <Icon name="notifications" size={24} color="#1C1C1E" />
+          <TouchableOpacity style={[styles.notificationButton, { backgroundColor: theme.cardBackground }]}>
+            <Icon name="notifications" size={24} color={theme.textPrimary} />
           </TouchableOpacity>
         </View>
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <View style={styles.searchBar}>
-            <Icon name="search" size={20} color="#8E8E93" style={styles.searchIcon} />
+          <View style={[styles.searchBar, { backgroundColor: theme.cardBackground }]}>
+            <Icon name="search" size={20} color={theme.textSecondary} style={styles.searchIcon} />
             <TextInput
-              style={styles.searchInput}
+              style={[styles.searchInput, { color: theme.textPrimary }]}
               placeholder="Search for services..."
-              placeholderTextColor="#8E8E93"
+              placeholderTextColor={theme.textSecondary}
               value={searchQuery}
               onChangeText={setSearchQuery}
             />
             {searchQuery.length > 0 && (
               <TouchableOpacity onPress={() => setSearchQuery('')}>
-                <Icon name="close" size={20} color="#8E8E93" />
+                <Icon name="close" size={20} color={theme.textSecondary} />
               </TouchableOpacity>
             )}
           </View>
@@ -110,7 +112,7 @@ const HomeScreen: React.FC = () => {
 
         {/* Service Categories */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>What do you need?</Text>
+          <Text style={[styles.sectionTitle, { color: theme.textPrimary }]}>What do you need?</Text>
           <FlatList
             data={serviceCategories}
             renderItem={renderServiceCategory}
@@ -125,7 +127,7 @@ const HomeScreen: React.FC = () => {
         {/* Popular Services */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Popular Services</Text>
+            <Text style={[styles.sectionTitle, { color: theme.textPrimary }]}>Popular Services</Text>
             <TouchableOpacity>
               <Text style={styles.seeAllText}>See All</Text>
             </TouchableOpacity>
@@ -142,27 +144,27 @@ const HomeScreen: React.FC = () => {
 
         {/* Quick Actions */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Quick Actions</Text>
+          <Text style={[styles.sectionTitle, { color: theme.textPrimary }]}>Quick Actions</Text>
           <View style={styles.quickActions}>
-            <TouchableOpacity style={styles.quickAction}>
-              <View style={styles.quickActionIcon}>
-                <Icon name="schedule" size={24} color="#FF6B35" />
+            <TouchableOpacity style={[styles.quickAction, { backgroundColor: theme.cardBackground }]}>
+              <View style={[styles.quickActionIcon, { backgroundColor: isDarkMode ? '#3A3A3C' : '#FFF5F2' }]}>
+                <Icon name="schedule" size={24} color={theme.primaryColor} />
               </View>
-              <Text style={styles.quickActionText}>Book Service</Text>
+              <Text style={[styles.quickActionText, { color: theme.textPrimary }]}>Book Service</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity style={styles.quickAction}>
-              <View style={styles.quickActionIcon}>
-                <Icon name="history" size={24} color="#FF6B35" />
+            <TouchableOpacity style={[styles.quickAction, { backgroundColor: theme.cardBackground }]}>
+              <View style={[styles.quickActionIcon, { backgroundColor: isDarkMode ? '#3A3A3C' : '#FFF5F2' }]}>
+                <Icon name="history" size={24} color={theme.primaryColor} />
               </View>
-              <Text style={styles.quickActionText}>My Bookings</Text>
+              <Text style={[styles.quickActionText, { color: theme.textPrimary }]}>My Bookings</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity style={styles.quickAction}>
-              <View style={styles.quickActionIcon}>
-                <Icon name="support-agent" size={24} color="#FF6B35" />
+            <TouchableOpacity style={[styles.quickAction, { backgroundColor: theme.cardBackground }]}>
+              <View style={[styles.quickActionIcon, { backgroundColor: isDarkMode ? '#3A3A3C' : '#FFF5F2' }]}>
+                <Icon name="support-agent" size={24} color={theme.primaryColor} />
               </View>
-              <Text style={styles.quickActionText}>Support</Text>
+              <Text style={[styles.quickActionText, { color: theme.textPrimary }]}>Support</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -177,7 +179,6 @@ const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
   },
   header: {
     flexDirection: 'row',
@@ -188,19 +189,16 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 14,
-    color: '#8E8E93',
     fontWeight: '400',
   },
   userName: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#1C1C1E',
   },
   notificationButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -216,7 +214,6 @@ const styles = StyleSheet.create({
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -232,7 +229,6 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 16,
-    color: '#1C1C1E',
   },
   bannerContainer: {
     paddingHorizontal: 20,
@@ -294,7 +290,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#1C1C1E',
   },
   seeAllText: {
     fontSize: 14,
@@ -306,7 +301,6 @@ const styles = StyleSheet.create({
   },
   categoryCard: {
     width: (width - 60) / 2,
-    backgroundColor: '#FFFFFF',
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
@@ -331,13 +325,11 @@ const styles = StyleSheet.create({
   categoryTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#1C1C1E',
     textAlign: 'center',
     marginBottom: 4,
   },
   categorySubtitle: {
     fontSize: 12,
-    color: '#8E8E93',
     textAlign: 'center',
   },
   serviceCard: {
@@ -350,7 +342,6 @@ const styles = StyleSheet.create({
   quickAction: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
     borderRadius: 12,
     padding: 16,
     marginHorizontal: 4,
@@ -364,7 +355,6 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#FFF5F2',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 8,
@@ -372,7 +362,6 @@ const styles = StyleSheet.create({
   quickActionText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#1C1C1E',
     textAlign: 'center',
   },
   bottomSpacing: {
